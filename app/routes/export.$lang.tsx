@@ -1,11 +1,8 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { FileName } from "models/FileName";
-import { Nav } from "~/components/Nav";
-import { requireAuthentication } from "~/utils/auth.server";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-    // If the user is already authenticated redirect to /dashboard directly
     let filenames = await FileName.find()
     return { filenames }
 };

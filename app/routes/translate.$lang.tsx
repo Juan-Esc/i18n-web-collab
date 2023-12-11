@@ -1,8 +1,7 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { FileName } from "models/FileName";
-import { Nav } from "~/components/Nav";
-import { authenticator, requireAuthentication } from "~/utils/auth.server";
+import { requireAuthentication } from "~/utils/auth.server";
 
 export const meta: MetaFunction = () => {
     return [
@@ -20,7 +19,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function TranslateLayout() {
     const data = useLoaderData<typeof loader>();
-    
+
     return (
         <div>
             <ul className="menu menu-vertical lg:menu-horizontal bg-base-200 rounded-box">

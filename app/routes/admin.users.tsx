@@ -3,7 +3,6 @@ import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { IUserDoc, User } from "models/User";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
-    // If the user is already authenticated redirect to /dashboard directly
     let users: IUserDoc[] = await User.find({}) as IUserDoc[]
     return { users }
 };

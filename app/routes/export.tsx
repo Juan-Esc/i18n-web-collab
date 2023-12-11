@@ -5,7 +5,6 @@ import { requireAuthentication } from "~/utils/auth.server";
 import { languages } from 'config.json';
 
 export async function loader({ request }: LoaderFunctionArgs) {
-    // If the user is already authenticated redirect to /dashboard directly
     let user: any = await requireAuthentication(request)
     return { isAdmin: user.isAdmin }
 };

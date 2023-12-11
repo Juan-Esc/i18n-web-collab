@@ -1,7 +1,7 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { Nav } from "~/components/Nav";
-import { authenticator, requireAuthentication } from "~/utils/auth.server";
+import { requireAuthentication } from "~/utils/auth.server";
 import { languages } from 'config.json';
 
 export const meta: MetaFunction = () => {
@@ -12,7 +12,6 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
-    // If the user is already authenticated redirect to /dashboard directly
     return await requireAuthentication(request)
 };
 

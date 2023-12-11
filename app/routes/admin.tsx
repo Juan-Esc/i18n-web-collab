@@ -11,7 +11,6 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
-    // If the user is already authenticated redirect to /dashboard directly
     return requireAdmin(request)
 };
 

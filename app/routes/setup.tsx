@@ -11,9 +11,6 @@ export const meta: MetaFunction = () => {
 };
 
 export async function action({ request }: ActionFunctionArgs) {
-    // we call the method with the name of the strategy we want to use and the
-    // request object, optionally we pass an object with the URLs we want the user
-    // to be redirected to after a success or a failure
     const body = await request.formData();
     const email = body.get("email")?.toString();
     const password = body.get("password")?.toString();
@@ -28,11 +25,7 @@ export async function action({ request }: ActionFunctionArgs) {
     });
 };
 
-// Finally, we can export a loader function where we check if the user is
-// authenticated with `authenticator.isAuthenticated` and redirect to the
-// dashboard if it is or return null if it's not
 export async function loader({ request }: LoaderFunctionArgs) {
-    // If the user is already authenticated redirect to /dashboard directly
     const userCount = await User.countDocuments();
 
     if (userCount > 0) return redirect("/");

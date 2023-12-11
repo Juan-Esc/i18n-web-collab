@@ -1,10 +1,8 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { AlertPhrase, IAlertPhraseDoc } from "models/AlertPhrase";
-import { IUserDoc, User } from "models/User";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
-    // If the user is already authenticated redirect to /dashboard directly
     let alertPhrases = await AlertPhrase.find({}) as IAlertPhraseDoc[]
     return { alertPhrases }
 };
@@ -49,7 +47,7 @@ interface AlertDevsReadModalProps {
 export const AlertDevsReadModal = ({ alertPhrase }: AlertDevsReadModalProps) => {
     return (
         <>
-            <button className="btn" onClick={() => document.getElementById('my_modal_3').showModal()}>Read report</button>
+            <button className="btn" onClick={() => (document.getElementById('my_modal_3') as any).showModal()}>Read report</button>
             <dialog id="my_modal_3" className="modal">
                 <div className="modal-box">
                     <form method="dialog">

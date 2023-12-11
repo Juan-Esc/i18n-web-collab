@@ -1,10 +1,9 @@
 import { redirect, type LoaderFunctionArgs, type MetaFunction, ActionFunctionArgs } from "@remix-run/node";
-import { Form, Link, Outlet, useLoaderData, useNavigate } from "@remix-run/react";
+import { Form, useLoaderData, useNavigate } from "@remix-run/react";
 import { AlertPhrase, IAlertPhraseDoc } from "models/AlertPhrase";
 import { HistoryPhrase, IHistoryPhraseDoc } from "models/HistoryPhrase";
 import { IPhraseDoc, Phrase } from "models/Phrase";
-import { Nav } from "~/components/Nav";
-import { authenticator, requireAuthentication } from "~/utils/auth.server";
+import { requireAuthentication } from "~/utils/auth.server";
 import { showDateAndHour } from "~/utils/date";
 
 export const meta: MetaFunction = () => {
@@ -25,9 +24,6 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 };
 
 export async function action({ request }: ActionFunctionArgs) {
-    // we call the method with the name of the strategy we want to use and the
-    // request object, optionally we pass an object with the URLs we want the user
-    // to be redirected to after a success or a failure
     const user = await requireAuthentication(request);
     const body = await request.formData();
 
@@ -79,7 +75,6 @@ export async function action({ request }: ActionFunctionArgs) {
                 langCode: phrase.langCode
             })
         }
-
         return redirect(`/translate/phrase/${id}`);
     }
 
@@ -90,7 +85,7 @@ export default function TranslateLayout() {
     if (!data?.phrase) return 'Error';
     const phrase: IPhraseDoc = data.phrase;
     const navigate = useNavigate()
-    
+
     return (
         <div>
             <button onClick={() => navigate(-1)} className="btn btn-square bg-transparent w-6">
@@ -111,7 +106,6 @@ export default function TranslateLayout() {
                             ))}
                         </div>
                     )}
-
                     <input type="hidden" name="id" value={phrase._id} />
                     <input type="text" name="key" className="input input-bordered" readOnly value={phrase.key} />
                     <input type="text" name="value" placeholder="Translation" className="input input-bordered" defaultValue={phrase.value} required />
@@ -121,7 +115,6 @@ export default function TranslateLayout() {
 
             <div className="mt-5">
                 <h2 className="text-2xl text-center font-bold mb-4">Last changes</h2>
-
                 <ul className="timeline timeline-vertical">
                     {data.historyPhrases.map((historyPhrase, index) => (
                         <li key={index}>
@@ -137,7 +130,7 @@ export default function TranslateLayout() {
                                     historyPhrase.username + " created this phrase"
                                 )}
                                 {historyPhrase.etype == 2 && (
-                                    <span>{historyPhrase.username} updated phrase <ReadOldPhraseModal key={historyPhrase._id.toString()} historyPhrase={historyPhrase} oldHistoryPhrase={data.historyPhrases[index+1]} /></span>
+                                    <span>{historyPhrase.username} updated phrase <ReadOldPhraseModal key={historyPhrase._id.toString()} historyPhrase={historyPhrase} oldHistoryPhrase={data.historyPhrases[index + 1]} /></span>
                                 )}
                             </div>
                             <hr />
@@ -167,7 +160,6 @@ export const AlertDevsModal = ({ phrase, alertPhrase }: AlertDevsModalProps) => 
                     <Form method="POST" onSubmit={() => document.getElementById('my_modal_3').close()} >
                         <h3 className="font-bold text-lg">Report a problem with this phrase</h3>
                         <p className="py-4">What makes it difficult or impossible to translate this sentence?</p>
-
                         <input type="hidden" name="id" value={phrase._id} />
                         {alertPhrase && (
                             <textarea className="textarea textarea-bordered w-full" placeholder="Tell us the problem 🤗" rows={4} name="message" defaultValue={alertPhrase.reason}  ></textarea>
@@ -188,7 +180,7 @@ interface ReadOldPhraseModalProps {
     oldHistoryPhrase: IHistoryPhraseDoc
 }
 
-export const ReadOldPhraseModal = ({ historyPhrase, oldHistoryPhrase } : ReadOldPhraseModalProps) => {
+export const ReadOldPhraseModal = ({ historyPhrase, oldHistoryPhrase }: ReadOldPhraseModalProps) => {
     return (
         <>
             <button className="btn" onClick={() => document.getElementById('readmodal' + historyPhrase._id).showModal()}>open modal</button>
@@ -196,10 +188,10 @@ export const ReadOldPhraseModal = ({ historyPhrase, oldHistoryPhrase } : ReadOld
                 <div className="modal-box">
                     <h3 className="font-bold text-lg my-5">{historyPhrase.username} updated translation</h3>
                     <fieldset disabled={true} className="space-y-2">
-                    <p className="text-lg">Old value:</p>
-                    <textarea className="textarea textarea-bordered w-full resize-none line-through" rows={2} name="phraseValue" defaultValue={oldHistoryPhrase?.value}  ></textarea>
-                    <p className="text-lg">New value:</p>
-                    <textarea className="textarea textarea-bordered w-full resize-none" rows={2} name="phraseValue" defaultValue={historyPhrase.value}  ></textarea>
+                        <p className="text-lg">Old value:</p>
+                        <textarea className="textarea textarea-bordered w-full resize-none line-through" rows={2} name="phraseValue" defaultValue={oldHistoryPhrase?.value}  ></textarea>
+                        <p className="text-lg">New value:</p>
+                        <textarea className="textarea textarea-bordered w-full resize-none" rows={2} name="phraseValue" defaultValue={historyPhrase.value}  ></textarea>
                     </fieldset>
                 </div>
                 <form method="dialog" className="modal-backdrop">

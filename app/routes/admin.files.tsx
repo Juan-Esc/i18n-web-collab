@@ -1,7 +1,6 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { FileName, IFileNameDoc } from "models/FileName";
-import { IUserDoc, User } from "models/User";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
     // If the user is already authenticated redirect to /dashboard directly

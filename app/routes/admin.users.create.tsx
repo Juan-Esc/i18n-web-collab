@@ -3,9 +3,6 @@ import { Form } from "@remix-run/react";
 import { createUserAccount } from "~/utils/auth.server";
 
 export async function action({ request }: ActionFunctionArgs) {
-    // we call the method with the name of the strategy we want to use and the
-    // request object, optionally we pass an object with the URLs we want the user
-    // to be redirected to after a success or a failure
     const body = await request.formData();
     const email = body.get("email")?.toString();
     const password = body.get("password")?.toString();

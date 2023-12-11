@@ -1,8 +1,7 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { Form, Link, Outlet, useLoaderData, useSearchParams } from "@remix-run/react";
+import { Form, Link, useLoaderData, useSearchParams } from "@remix-run/react";
 import { IPhraseDoc, Phrase } from "models/Phrase";
-import { Nav } from "~/components/Nav";
-import { authenticator, requireAuthentication } from "~/utils/auth.server";
+import { requireAuthentication } from "~/utils/auth.server";
 
 export const meta: MetaFunction = () => {
     return [
@@ -12,7 +11,6 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
-    // If the user is already authenticated redirect to /dashboard directly
     await requireAuthentication(request)
 
     const url = new URL(request.url);
@@ -21,10 +19,10 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     const skip = page ? parseInt(page) * 20 : 0;
 
     if (key) {
-        let phrases: IPhraseDoc[] = await Phrase.find({ 
-            langCode: params.lang, 
+        let phrases: IPhraseDoc[] = await Phrase.find({
+            langCode: params.lang,
             // filename: params.filename, 
-            key: { $regex: new RegExp(key, 'i') } 
+            key: { $regex: new RegExp(key, 'i') }
         }).skip(skip).limit(20);
         return { phrases }
     }
@@ -40,7 +38,6 @@ export default function TranslateLayout() {
     const phrases: IPhraseDoc[] = data.phrases as IPhraseDoc[]
     return (
         <div className="overflow-x-auto">
-
             <Form method="get">
                 <div className="join flex justify-end">
                     <div>
@@ -53,7 +50,6 @@ export default function TranslateLayout() {
                     </div>
                 </div>
             </Form>
-
             <table className="table table-zebra mt-6">
                 <thead>
                     <tr>
