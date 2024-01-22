@@ -4,6 +4,12 @@ The easiest way to let others help translate your app
 
 Made with Remix ⚡
 
+## Installation and running with Docker (recommended)
+
+```bash
+docker-compose up --build
+```
+
 ## Installation and running
 
 - Install NodeJS v18.18.0 or above

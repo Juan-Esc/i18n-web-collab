@@ -28,7 +28,7 @@ export default function Alerts() {
                     {data.alertPhrases.map((alert: IAlertPhraseDoc) => {
                         return (
                             <tr key={alert._id} className="hover">
-                                <td>{alert.phraseId}</td>
+                                <td>{String(alert.phraseId)}</td>
                                 <td>{alert.langCode}</td>
                                 <td><AlertDevsReadModal alertPhrase={alert} /></td>
                             </tr>
@@ -47,8 +47,8 @@ interface AlertDevsReadModalProps {
 export const AlertDevsReadModal = ({ alertPhrase }: AlertDevsReadModalProps) => {
     return (
         <>
-            <button className="btn" onClick={() => (document.getElementById('my_modal_3') as any).showModal()}>Read report</button>
-            <dialog id="my_modal_3" className="modal">
+            <button className="btn" onClick={() => (document.getElementById(`modal_${alertPhrase.phraseId}`) as any).showModal()}>Read report</button>
+            <dialog id={`modal_${alertPhrase.phraseId}`} className="modal">
                 <div className="modal-box">
                     <form method="dialog">
                         {/* if there is a button in form, it will close the modal */}

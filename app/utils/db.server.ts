@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 import { mongodb_uri } from 'config.json'
+console.log("dockeR? " + process.env.DOCKERIZED)
 
-let connectionString = mongodb_uri || "mongodb://127.0.0.1:27017/i18nweb";
+let connectionString = (process.env.DOCKERIZED === 'true') ? 'mongodb://mongodb:27017/i18nweb' : (mongodb_uri || 'mongodb://127.0.0.1:27017/i18nweb');
+
 if (connectionString.indexOf("appName") === -1) connectionString += connectionString.indexOf("?") > -1 ? "&appName=remix|" : "?appName=remix|";
 else connectionString = connectionString.replace(/appName\=([a-z0-9]*)/i, (m,p) => `appName=remix|${p}`);
 

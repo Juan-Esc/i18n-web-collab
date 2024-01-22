@@ -21,8 +21,10 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     if (key) {
         let phrases: IPhraseDoc[] = await Phrase.find({
             langCode: params.lang,
-            // filename: params.filename, 
-            key: { $regex: new RegExp(key, 'i') }
+            $or: [
+                { key: { $regex: new RegExp(key, 'i') } },
+                { value: { $regex: new RegExp(key, 'i') } }
+            ]
         }).skip(skip).limit(20);
         return { phrases }
     }

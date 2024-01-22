@@ -1,0 +1,27 @@
+version: '3'
+services:
+  nodeapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DOCKERIZED=true
+    ports:
+      - "3000:3000"
+    networks:
+      - mynetwork
+
+  mongodb:
+    image: mongo:6.0.13
+    ports:
+      - "27020:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - mynetwork
+
+volumes:
+  mongodb_data:
+
+networks:
+  mynetwork:
