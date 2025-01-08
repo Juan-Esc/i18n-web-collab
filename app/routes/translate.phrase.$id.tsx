@@ -9,7 +9,7 @@ import { showDateAndHour } from "~/utils/date";
 export const meta: MetaFunction = () => {
     return [
         { title: "i18n web collab" },
-        { name: "description", content: "Make translations together" },
+        { name: "description", content: "Translate together!" },
     ];
 };
 

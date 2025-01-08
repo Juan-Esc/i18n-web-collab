@@ -13,7 +13,7 @@ import { HistoryPhrase } from "models/HistoryPhrase";
 export const meta: MetaFunction = () => {
     return [
         { title: "i18n web collab" },
-        { name: "description", content: "Make translations together" },
+        { name: "description", content: "Translate together!" },
     ];
 };
 

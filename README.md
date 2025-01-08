@@ -7,7 +7,7 @@ Made with Remix ⚡
 ## Installation and running with Docker (recommended)
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 ## Installation and running
@@ -30,6 +30,8 @@ npm run start
 ```
 
 The webapp is now listening at http://localhost:3000
+
+Access http://localhost:3000/setup to create the first admin user.
 
 Now you can pick a host to deploy it to.
 

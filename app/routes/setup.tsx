@@ -6,7 +6,7 @@ import { authenticator, createUserAccount, requireAuthentication } from "~/utils
 export const meta: MetaFunction = () => {
     return [
         { title: "Create | i18n web collab" },
-        { name: "description", content: "Make translations together" },
+        { name: "description", content: "Translate together!" },
     ];
 };
 

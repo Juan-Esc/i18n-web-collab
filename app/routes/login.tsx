@@ -5,7 +5,7 @@ import { authenticator, requireAuthentication } from "~/utils/auth.server";
 export const meta: MetaFunction = () => {
     return [
         { title: "i18n web collab" },
-        { name: "description", content: "Make translations together" },
+        { name: "description", content: "Translate together!" },
     ];
 };
 

@@ -1,8 +1,9 @@
 {
-    "mongodb_uri": "mongodb://127.0.0.1:27017/i18nweb",
+    "mongodb_uri": "mongodb://127.0.0.1:27020/i18nweb",
     "secret_session": "change-me",
     "languages": {
         "en": "🇬🇧 English",
-        "es": "🇪🇸 Spanish"
+        "es": "🇪🇸 Spanish",
+        "de": "🇩🇪 German"
     }
 }

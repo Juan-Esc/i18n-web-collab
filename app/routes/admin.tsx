@@ -6,7 +6,7 @@ import { authenticator, requireAdmin, requireAuthentication } from "~/utils/auth
 export const meta: MetaFunction = () => {
     return [
         { title: "i18n web collab" },
-        { name: "description", content: "Make translations together" },
+        { name: "description", content: "Translate together!" },
     ];
 };
 
